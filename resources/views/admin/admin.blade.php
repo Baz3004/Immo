@@ -8,6 +8,13 @@
     <title>@yield('title',) | Administration</title>
 </head>
 <body>
+    <div>
+        @if (session('success'))
+            <div class="bg-green-200 text-green-900 py-5">
+                {{session('success')}}
+            </div>
+        @endif
+    </div>
         @yield('content')
 </body>
 </html>

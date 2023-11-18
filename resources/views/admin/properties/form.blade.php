@@ -26,13 +26,40 @@
                 </div>
             </div>
             <div>
-                @include('shared.input',['type'=>'textarea','label'=>'description','name'=>'price','value'=>$property->price,'class'=>'border w-full'])
+                @include('shared.input',['type'=>'textarea','label'=>'Description','name'=>'description','value'=>$property->description,'class'=>'border w-full'])
             </div>
-            <button class="bg-blue-500 text-white p-2 rounded-md">
+            <div class="grid grid-cols-3 gap-3">
+                <div>
+                    @include('shared.input',['label'=>'Etages','name'=>'floor', 'value'=>$property->floor,'class'=>'border w-full'])
+                </div>
+                <div>
+                    @include('shared.input',['label'=>'Chambres','name'=>'bedrooms', 'value'=>$property->bedrooms,'class'=>'border w-full'])
+                </div>
+                <div>
+                    @include('shared.input',['label'=>'Piece','name'=>'rooms', 'value'=>$property->rooms,'class'=>'border w-full'])
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3">
+                <div>
+                    @include('shared.input',['label'=>'Adresse','name'=>'adress', 'value'=>$property->adress,'class'=>'border w-full'])
+                </div>
+                <div>
+                    @include('shared.input',['label'=>'Ville','name'=>'city', 'value'=>$property->city,'class'=>'border w-full'])
+                </div>
+                <div>
+                    @include('shared.input',['label'=>'code postal','name'=>'postal_code', 'value'=>$property->adress,'class'=>'border w-full'])
+                </div>
+            </div>
+            <div>
+                @include('shared.checkbox',['label'=>'Vendu','name'=>'sold'])
+            </div>
+
+            <button class="bg-blue-500 text-white p-2 rounded-md my-5">
                 @if ($property->exists)
-                    Update
+                    Modifier
                 @else
-                    Store    
+                    Creer    
                 @endif
             </button>
         </div>

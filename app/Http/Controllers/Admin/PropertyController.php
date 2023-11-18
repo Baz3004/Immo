@@ -15,7 +15,7 @@ class PropertyController extends Controller
     public function index()
     {
         return view('admin.properties.index', [
-            'properties' => property::orderBy('created_at', 'desc')->paginate(25)
+            'properties' => property::orderBy('created_at', 'desc')->paginate(2)
         ]);
     }
 
@@ -24,8 +24,11 @@ class PropertyController extends Controller
      */
     public function create()
     {
+        $property = new property();
+        $property->title= 'baz';
+        
         return view('admin.properties.form',[
-            'property' => new property()
+            'property' => $property
         ]);
     }
 
@@ -34,16 +37,19 @@ class PropertyController extends Controller
      */
     public function store(PropertyRequest $request)
     {
-        //
+        $property = property::create($request->validated());
+        return to_route('admin.property.index')->with('success','Bien ajoute avec sucssessss');
     }
 
     
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource
      */
-    public function edit(string $id)
+    public function edit(property $property)
     {
-        //
+        return view('admin.properties.form',[
+            'property' => $property
+        ]);
     }
 
     /**
@@ -57,8 +63,9 @@ class PropertyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(property $property)
     {
-        //
+        $property->delete();
+        return view('admin.property.index');
     }
 }

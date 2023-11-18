@@ -11,24 +11,33 @@
                 <a href="{{route('admin.property.create')}}">Ajouter un bien</a>
             </div>
         </div>
-        <table class="w-full">
+        <table class="w-full text-start">
             <thead>
                 <tr class="shadow-gray-300 shadow-md">
-                    <th>Titre</th>
-                    <th>Surface</th>
-                    <th>Prix</th>
-                    <th>Ville</th>
-                    <th>Actions</th>
+                    <th class="text-start">Titre</th>
+                    <th class="text-start">Surface</th>
+                    <th class="text-start">Prix</th>
+                    <th class="text-start">Ville</th>
+                    <th class="text-end">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($properties as $property)
-                    <tr>
-                        <td>{{$propery->title}}</td>
-                        <td>{{$propery->surface}} m2</td>
-                        <td>{{ number_format($propery->price, thousands_separator:' ') }}</td>
-                        <td>{{$propery->city}}</td>
-                        <td></td>
+                    <tr class="bg-gray-200 border border-gray-400 border-x-0">
+                        <td class=" py-2">{{$property->title}}</td>
+                        <td class=" py-2">{{$property->surface}} m2</td>
+                        <td class=" py-2">{{ number_format($property->price, thousands_separator:' ') }}</td>
+                        <td class=" py-2">{{$property->city}}</td>
+                        <td class=" py-2 flex items-center gap-2">
+                            <div>
+                                <a href="{{route('admin.property.edit', $property)}}" class="bg-blue-500 text-white py-2 px-3">Modifier</a>
+                            </div>
+                            <form action="{{route('admin.property.destroy', $property)}}" method="post">
+                                @method('delete')
+                                @csrf
+                                <input type="submit" class="bg-red-500 text-white py-2 px-3" value="Supprimer">
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
