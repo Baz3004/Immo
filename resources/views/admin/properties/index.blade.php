@@ -25,14 +25,17 @@
                 @foreach ($properties as $property)
                     <tr>
                         <td>{{$propery->title}}</td>
-                        <td>{{$propery->surface}}</td>
-                        <td>{{$propery->price}}</td>
+                        <td>{{$propery->surface}} m2</td>
+                        <td>{{ number_format($propery->price, thousands_separator:' ') }}</td>
                         <td>{{$propery->city}}</td>
                         <td></td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        <div>
+            {{ $properties->links() }}
+        </div>
     </div>
     
 @endsection
